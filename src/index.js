@@ -66,8 +66,10 @@ function flexbox(properties) {
   // polyfill for safari
   if (ua.indexOf('safari') !== -1 && ua.indexOf('chrome') === -1) {
     let rename = function(obj, from, to) {
-      obj[to] = obj[from];
-      delete obj[from];
+      if(object[from] !== undefined && object[from] !== null) {
+        obj[to] = obj[from];
+        delete obj[from];
+      }
     }
 
     if(properties.display === 'flex') {
