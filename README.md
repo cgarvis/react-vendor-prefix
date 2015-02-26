@@ -6,7 +6,9 @@
 var VendorPrefix = require('react-vendor-prefix');
 
 module.exports = VendorPrefix.prefix({
-    animationDuration: '3s',
-    animationName: 'slidein',
+    container: {
+        animationDuration: '3s',
+        animationName: 'slidein',
+    }
 });
 ```
