@@ -64,7 +64,7 @@ function flexbox(properties) {
   var ua = navigator.userAgent.toLowerCase();
 
   // polyfill for safari
-  if (ua.indexOf('safari') !== -1 && ua.indexOf('chrome') === -1) {
+  if ((ua.indexOf('safari') !== -1 || ua.indexOf('iphone os') !== -1) && ua.indexOf('chrome') === -1) {
     let rename = function(obj, from, to) {
       if(obj[from] !== undefined && obj[from] !== null) {
         obj[to] = obj[from];

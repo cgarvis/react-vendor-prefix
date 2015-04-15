@@ -1,1 +1,129 @@
-module.exports=function(n){function t(i){if(e[i])return e[i].exports;var r=e[i]={exports:{},id:i,loaded:!1};return n[i].call(r.exports,r,r.exports,t),r.loaded=!0,r.exports}var e={};return t.m=n,t.c=e,t.p="",t(0)}([function(n,t){"use strict";function e(n){return a.js+n[0].toUpperCase()+n.substr(1)}function i(n){return Object.keys(n).reduce(function(t,i){return-1!==s.indexOf(i)?t[e(i)]=n[i]:t[i]=n[i],t},{})}function r(n){var t=navigator.userAgent.toLowerCase();return-1!==t.indexOf("safari")&&-1===t.indexOf("chrome")?!function(){var t=function(n,t,e){void 0!==n[t]&&null!==n[t]&&(n[e]=n[t],delete n[t])};"flex"===n.display&&(n.display="-webkit-flex"),["alignItems","justifyContent","flexDirection","flex","flexWrap"].forEach(function(i){t(n,i,e(i))})}():-1!==navigator.appVersion.indexOf("MSIE 10")&&"flex"===n.display&&(n.display="-ms-flexbox"),n}function o(n){return Object.keys(n).reduce(function(t,e){return t[e]=r(i(n[e])),t},{})}var a=function(){var n=window.getComputedStyle(document.documentElement,""),t=(Array.prototype.slice.call(n).join("").match(/-(moz|webkit|ms)-/)||""===n.OLink&&["","o"])[1];return{dom:"ms"===t?"MS":t,lowercase:t,css:"-"+t+"-",js:"ms"===t?t:t[0].toUpperCase()+t.substr(1)}}(),s=["animation","animationDelay","animationDirection","animationDuration","animationFillMode","animationIterationCount","animationName","animationPlayState","animationTimingFunction","appearance","backfaceVisibility","backgroundClip","borderImage","borderImageSlice","boxSizing","boxShadow","contentColumns","transform","transformOrigin","transformStyle","transition","transitionDelay","transitionDuration","transitionProperty","transitionTimingFunction","perspective","perspectiveOrigin","userSelect"];t.prefix=o}]);
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var prefix = (function () {
+	  var styles = window.getComputedStyle(document.documentElement, ""),
+	      pre = (Array.prototype.slice.call(styles).join("").match(/-(moz|webkit|ms)-/) || styles.OLink === "" && ["", "o"])[1];
+	  return {
+	    dom: pre === "ms" ? "MS" : pre,
+	    lowercase: pre,
+	    css: "-" + pre + "-",
+	    js: pre === "ms" ? pre : pre[0].toUpperCase() + pre.substr(1)
+	  };
+	})();
+
+	var vendorSpecificProperties = ["animation", "animationDelay", "animationDirection", "animationDuration", "animationFillMode", "animationIterationCount", "animationName", "animationPlayState", "animationTimingFunction", "appearance", "backfaceVisibility", "backgroundClip", "borderImage", "borderImageSlice", "boxSizing", "boxShadow", "contentColumns", "transform", "transformOrigin", "transformStyle", "transition", "transitionDelay", "transitionDuration", "transitionProperty", "transitionTimingFunction", "perspective", "perspectiveOrigin", "userSelect"];
+
+	function prefixName(name) {
+	  return prefix.js + name[0].toUpperCase() + name.substr(1);
+	}
+
+	function prefixStyle(properties) {
+	  return Object.keys(properties).reduce(function (previous, property) {
+	    if (vendorSpecificProperties.indexOf(property) !== -1) {
+	      previous[prefixName(property)] = properties[property];
+	    } else {
+	      previous[property] = properties[property];
+	    }
+
+	    return previous;
+	  }, {});
+	}
+
+	function flexbox(properties) {
+	  var ua = navigator.userAgent.toLowerCase();
+
+	  // polyfill for safari
+	  if ((ua.indexOf("safari") !== -1 || ua.indexOf("iphone os") !== -1) && ua.indexOf("chrome") === -1) {
+	    (function () {
+	      var rename = function (obj, from, to) {
+	        if (obj[from] !== undefined && obj[from] !== null) {
+	          obj[to] = obj[from];
+	          delete obj[from];
+	        }
+	      };
+
+	      if (properties.display === "flex") {
+	        properties.display = "-webkit-flex";
+	      }
+
+	      ["alignItems", "justifyContent", "flexDirection", "flex", "flexWrap"].forEach(function (prop) {
+	        rename(properties, prop, prefixName(prop));
+	      });
+	      // polyfil for IE10
+	    })();
+	  } else if (navigator.appVersion.indexOf("MSIE 10") !== -1) {
+	    if (properties.display === "flex") {
+	      properties.display = "-ms-flexbox";
+	    }
+
+	    // @TODO: implement 2012 flexbox syntax
+	  }
+
+
+	  return properties;
+	}
+
+	function prefixStyles(styles) {
+	  return Object.keys(styles).reduce(function (previous, current) {
+	    previous[current] = flexbox(prefixStyle(styles[current]));
+	    return previous;
+	  }, {});
+	};
+
+	exports.prefix = prefixStyles;
+
+	/*
+	 * var styles = VendorPrefix.prefix({
+	 *  animation: '0.25 ease',
+	 * });
+	 */
+
+/***/ }
+/******/ ]);
