@@ -1,4 +1,7 @@
 let prefix = (function () {
+  if (typeof window === "undefined") {
+    return {};
+  }
   var styles = window.getComputedStyle(document.documentElement, ''),
     pre = (Array.prototype.slice
       .call(styles)
@@ -97,6 +100,9 @@ function flexbox(properties) {
 }
 
 function prefixStyles(styles) {
+  if (typeof window === "undefined") {
+    return styles;
+  }
   return Object.keys(styles).reduce((previous, current) => {
     previous[current] = flexbox(prefixStyle(styles[current]));
     return previous;
