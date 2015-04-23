@@ -69,7 +69,7 @@ function flexbox(properties) {
   // polyfill for safari
   let iOS = false;
   if (navigator.platform) {
-    iOS = ['iPad', 'iPhone', 'iPod'].indexOf(navigator.platform.replace(' Simulator', '')) >= -1;
+    iOS = ['iPad', 'iPhone', 'iPod'].indexOf(navigator.platform.replace(' Simulator', '')) > -1;
   }
   if ((ua.indexOf('safari') !== -1 || iOS ) && ua.indexOf('chrome') === -1) {
     let rename = function(obj, from, to) {
