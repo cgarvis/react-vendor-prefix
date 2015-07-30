@@ -85,7 +85,7 @@ function flexbox(properties) {
       properties.display = '-webkit-flex';
     }
 
-    ['alignItems', 'justifyContent', 'flexDirection', 'flex', 'flexWrap'].forEach((prop) => {
+    ['alignItems', 'justifyContent', 'flexDirection', 'flex', 'flexWrap', 'order', 'align-self'].forEach((prop) => {
       rename(properties, prop, prefixName(prop));
     });
   // polyfil for IE10
