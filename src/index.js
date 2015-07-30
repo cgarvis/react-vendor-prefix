@@ -34,6 +34,7 @@ let vendorSpecificProperties = [
   'boxSizing',
   'boxShadow',
   'contentColumns',
+  'filter',
   'transform',
   'transformOrigin',
   'transformStyle',
