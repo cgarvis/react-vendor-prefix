@@ -109,6 +109,7 @@ function prefixStyles(styles) {
   }, {});
 };
 
+exports.prefixOne = prefixStyle;
 exports.prefix = prefixStyles;
 
 /*
