@@ -64,6 +64,9 @@ function prefixStyle(properties) {
 }
 
 function flexbox(properties) {
+  if (typeof navigator === "undefined") {
+    return properties;
+  }
   var ua = navigator.userAgent.toLowerCase();
 
   // polyfill for safari
@@ -109,6 +112,9 @@ function prefixStyles(styles) {
   }, {});
 };
 
+exports.prefixOne = function(style) {
+  return flexbox(prefixStyle(style));
+}
 exports.prefix = prefixStyles;
 
 /*
